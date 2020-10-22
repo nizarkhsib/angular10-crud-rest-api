@@ -1,0 +1,42 @@
+{
+  "users": [
+    {
+      "id": 3,
+      "name": "Mohamed Salah",
+      "email": "med.salah@gmail.com",
+      "type": "Admin",
+      "is_edit": false
+    },
+    {
+      "name": "Micheal Jordan",
+      "email": "micheal.jordan@gmail.com",
+      "type": "ReadOnly",
+      "id": 5
+    },
+    {
+      "id": 6,
+      "name": "Alain Dupont",
+      "email": "a.dupont@gmail.com",
+      "type": "User",
+      "is_edit": false
+    },
+    {
+      "name": "Nizar Khsib",
+      "email": "nizar.khsib@gmail.com",
+      "type": "Admin",
+      "id": 7
+    },
+    {
+      "name": "Barack Obama",
+      "email": "b.obama@gmail.com",
+      "type": "Admin",
+      "id": 8
+    },
+    {
+      "name": "Albert Camus",
+      "email": "albert.camus@gmail.com",
+      "type": "Admin",
+      "id": 9
+    }
+  ]
+}

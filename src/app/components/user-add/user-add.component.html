@@ -1,0 +1,45 @@
+<h1> Add a user</h1>
+
+<form [formGroup]="userForm.form" class="add-form">
+
+    <mat-form-field appearance="fill" >
+        <mat-label>Name</mat-label>
+        <input formControlName="name" matInput placeholder="Name">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Type</mat-label>
+        <select *ngIf="data.admin" formControlName="type" matNativeControl required>
+            <option value="" selected hidden>--- Selectionnez un type ---</option>
+            <option *ngFor="let type of types">{{type}}</option>
+        </select>
+
+        <select *ngIf="!data.admin" formControlName="type" matNativeControl required>
+            <option value="Admin" selected>Admin</option>
+        </select>
+
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" >
+        <mat-label>Email</mat-label>
+        <input formControlName="email" matInput placeholder="Ex. pat@example.com">
+        <mat-hint *ngIf="userForm.form.controls['email'].touched && userForm.form.controls['email'].invalid">
+            Please enter a valid Email !
+        </mat-hint>
+
+        <mat-hint *ngIf="emailAlreadyExist">
+            <b>
+                Email already exists !
+            </b>
+        </mat-hint>
+    </mat-form-field>
+
+    <div mat-dialog-actions>
+        <button mat-button (click)="onNoClick()">Cancel</button>
+        <button mat-button [disabled]="!userForm.form.valid || emailAlreadyExist" (click)="addUser()" cdkFocusInitial>
+            Ok
+        </button>
+    </div>  
+
+</form>
+  

@@ -1,0 +1,121 @@
+
+  
+
+<form [formGroup]="searchForm.form">
+
+  <mat-form-field class="input" [floatLabel]="'never'">
+
+    <span matPrefix>
+      <mat-icon matSuffix>search</mat-icon>
+    </span>
+
+    <input formControlName="filter" 
+          (focus)="setupFilter('name','email')" 
+          matInput placeholder="Search..."
+          #searchInput>
+  </mat-form-field>
+  
+  <mat-hint *ngIf="!isAdminExist">
+    <b>
+        No admin found, please add one !
+    </b>
+  </mat-hint>
+
+  <button mat-mini-fab class="add-btn" mat-raised-button color="primary" (click)="openDialog()" >
+    <mat-icon matSuffix >add</mat-icon> 
+  </button>
+  <button mat-mini-fab class="chart-btn" mat-raised-button color="primary" (click)="openChart()" >
+    <mat-icon matSuffix >insert_chart</mat-icon> 
+  </button> 
+
+</form>
+
+<table #table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!-- name Column -->
+    <ng-container matColumnDef="name">
+
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell class="edit-input" *matCellDef="let element;"> 
+        <span *ngIf="!element.form.value.is_edit">
+          {{element.form.value.name}}
+        </span>
+
+        <mat-form-field *ngIf="element.form.value.is_edit" [formGroup]="element.form" appearance="fill" >
+          <input matInput placeholder="Name" formControlName="name" [value]="element.form.value.name">
+        </mat-form-field>
+      
+      </td>
+      
+    </ng-container>
+  
+    <!-- email Column -->
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef> Email </th>
+
+      <td mat-cell class="edit-input"  *matCellDef="let element;"> 
+        <span *ngIf="!element.form.value.is_edit">
+          {{element.form.value.email}}
+        </span>
+
+        <mat-form-field *ngIf="element.form.value.is_edit" [formGroup]="element.form" appearance="fill" >
+          <input matInput placeholder="Email" formControlName="email"  [value]="element.form.value.email">
+        </mat-form-field>
+      
+      </td>
+
+    </ng-container>
+  
+    <!-- type Column -->
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef> Type </th>
+      <td mat-cell *matCellDef="let element"> 
+
+        <span *ngIf="!element.form.value.is_edit">
+          {{element.form.value.type}}
+        </span>
+
+        <mat-form-field *ngIf="element.form.value.is_edit" [formGroup]="element.form" >
+          <mat-select formControlName="type"  >
+            <mat-option *ngFor="let type of types" [value]="type">
+                        {{type}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+      </td>
+
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="action" class="cln-action">
+      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <td mat-cell *matCellDef="let element">
+    
+      <button mat-icon-button *ngIf="!element.form.value.is_edit" class="close-btn" (click)="deleteUser(element)">
+        <mat-icon matSuffix >delete</mat-icon> 
+      </button>
+
+      <button mat-icon-button class="edit-btn" *ngIf="!element.form.value.is_edit" (click)="edit(element)">
+        <mat-icon matSuffix >edit</mat-icon> 
+      </button>
+
+      <button mat-icon-button *ngIf="element.form.value.is_edit" (click)="cancelEdit(element)">
+        <mat-icon matSuffix >close</mat-icon> 
+      </button>
+
+      <button mat-icon-button class="check-btn" *ngIf="element.form.value.is_edit" (click)="validateEdit(element)">
+        <mat-icon matSuffix >check</mat-icon> 
+      </button>
+
+      </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<mat-paginator #paginator
+              [pageSize]="10"
+              [pageSizeOptions]="[5, 10, 20]">
+</mat-paginator>
