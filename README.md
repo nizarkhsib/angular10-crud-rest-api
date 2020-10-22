@@ -11,3 +11,6 @@
 3. Run the app
 
   ng serve
+
+# This application is made with Angular 10/ Angular Material and a fake backend with json-server
+# There's an example with Charts.js library
