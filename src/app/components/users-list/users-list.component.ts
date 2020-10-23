@@ -134,19 +134,6 @@ export class UsersListComponent implements OnInit, AfterViewInit {
       width: '500px',
       data: { users: this.users }
     });
-
-    // dialogRef.afterClosed().subscribe(result => {
-    //   if (result !== undefined) {
-    //     this.snackBar.open('User created succesfuly !', 'Close', {
-    //       duration: 2000,
-    //     });
-    //     // refresh the data source
-    //     const newUser = new UserForm();
-    //     newUser.form.patchValue(result);
-    //     this.dataSource.data.push(newUser);
-    //     this.dataSource.data = this.dataSource.data;
-    //   }
-    // });
   }
 
   deleteUser(user): void {
